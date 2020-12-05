@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-// tslint:disable-next-line: import-blacklist
 import { Observable} from 'rxjs';
+import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { AlertifyService } from '../_services/alertify.service';
@@ -18,7 +18,7 @@ export class MemberDetailResolver implements Resolve<User> {
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/members']);
-                return null;
+                return of(null);
             })
         );
     }
